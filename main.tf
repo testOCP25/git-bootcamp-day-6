@@ -86,3 +86,12 @@ resource "aws_db_instance" "main" {
   db_subnet_group_name = aws_db_subnet_group.main.name
   skip_final_snapshot  = true
 }
+
+resource "aws_security_group_rule" "rds_ingress" {
+  type              = "ingress"
+  from_port         = 3306
+  to_port           = 3306
+  protocol          = "tcp"
+  security_group_id = aws_security_group.main.id
+  cidr_blocks       = ["10.0.0.0/8"]
+}
