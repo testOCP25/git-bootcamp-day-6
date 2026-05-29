@@ -69,3 +69,20 @@ resource "aws_instance" "main" {
     Name = "wordpress-app"
   }
 }
+
+resource "aws_db_subnet_group" "main" {
+  name       = "wordpress-db-subnet-group"
+  subnet_ids = aws_subnet.main[*].id
+}
+
+resource "aws_db_instance" "main" {
+  identifier           = "wordpress-db"
+  engine               = "mysql"
+  engine_version       = "8.0"
+  instance_class       = "db.t3.micro"
+  db_name              = var.db_name
+  username             = var.db_username
+  password             = var.db_password
+  db_subnet_group_name = aws_db_subnet_group.main.name
+  skip_final_snapshot  = true
+}

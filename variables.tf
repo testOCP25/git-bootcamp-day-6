@@ -27,3 +27,21 @@ variable "instance_type" {
   type        = string
   default     = "t2.micro"
 }
+
+variable "db_name" {
+  description = "RDS database name"
+  type        = string
+  default     = "wordpress"
+}
+
+variable "db_username" {
+  description = "RDS master username"
+  type        = string
+  default     = "admin"
+}
+
+variable "db_password" {
+  description = "RDS master password"
+  type        = string
+  sensitive   = true
+}
