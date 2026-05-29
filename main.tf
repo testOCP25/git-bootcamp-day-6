@@ -52,3 +52,20 @@ resource "aws_security_group" "main" {
     Name = "wordpress-app-sg"
   }
 }
+
+resource "aws_key_pair" "main" {
+  key_name   = "wordpress-key"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDexample bootcamp@example.com"
+}
+
+resource "aws_instance" "main" {
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  subnet_id              = aws_subnet.main[0].id
+  vpc_security_group_ids = [aws_security_group.main.id]
+  key_name               = aws_key_pair.main.key_name
+
+  tags = {
+    Name = "wordpress-app"
+  }
+}
