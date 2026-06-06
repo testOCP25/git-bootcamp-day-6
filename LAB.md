@@ -75,15 +75,22 @@ e18b12c (origin/main, origin/HEAD) feat(outputs): expose public IP and instance 
 
 **Stash vs WIP-коммит (2–3 предложения):**
 
-[FIXME: когда достаточно stash, когда лучше WIP-коммит + push feature-ветки — другая машина, коллеги, срок хранения черновика]
+
+`stash` лучше использовать, когда изменения временные, не готовы даже для чернового коммита и нужно быстро переключить контекст (например, поправить баг на другой ветке), не плодя лишних коммитов в истории. WIP-коммит с последующим пушем в feature-ветку уместнее, когда вы хотите поделиться промежуточной работой с коллегами, сделать бэкап перед сложным экспериментом или когда изменения большие и терять их в локальном стеше страшно. Главное отличие: stash хранится только локально, а WIP-коммит можно запушнуть и потом переписать через.
+
 
 ```bash
 # git stash list   # после pop — пуст
+stash@{0}: On feat/rds: feature/rds: Added new parameter 'multi_az'
 ```
 
 **Скриншоты (1–2 шт.):**
 
-![FIXME: stash list после push / git status после pop ](screenshots/star1-stash-1.png)
+![stash list после push](screenshots/star1-after-push.png)
+
+![git status после pop ](screenshots/star1-after-pop.png)
+
+
 
 ---
 
