@@ -98,17 +98,31 @@ stash@{0}: On feat/rds: feature/rds: Added new parameter 'multi_az'
 
 **Что конфликтовало и почему:**
 
-[FIXME: контекст instance_type на release/1.0 и main разный, patch не применился автоматически]
-
-**Как разрешили:**
-
-[FIXME: оставили t2.small и добавили instance_monitoring = true]
-
-```hcl
-# фрагмент terraform.tfvars на release/1.0 после cherry-pick --continue
-[FIXME: фрагмент terraform.tfvars после разрешения конфликта]
+Любопытно, что у меня конфликтов не было. Делал два раза.
+Файл `terraform.tfvars` на main:
+```text
+aws_region = "eu-central-1"
+instance_type = "t3.micro"
+ami_id        = "ami-0c7217cdde317cf38"
+instance_monitoring = true
 ```
+Файл `terraform.tfvars` на release/1.0:
+```text
+aws_region = "eu-central-1"
+instance_type = "t3.micro"
+ami_id        = "ami-0c7217cdde317cf38"
+```
+Конфликтов не было:
+![1st attempt](screenshots/star2-002.png)
 
-**Скриншоты (1–2 шт.):**
+Сделал отедльный коммит и поменял `instance_type`
 
-![FIXME: tfvars с маркерами конфликта / git log с cherry-pick trailer ](screenshots/star2-cherry-pick-1.png)
+Файл `terraform.tfvars` на release/1.0:
+```text
+aws_region = "eu-central-1"
+instance_type = "t2.micro"
+ami_id        = "ami-0c7217cdde317cf38"
+```
+Конфликтов не было и в этом случае:
+![1st attempt](screenshots/star2-001.png)
+
